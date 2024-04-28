@@ -2,9 +2,21 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { useQuery } from '@tanstack/react-query'
 
 function App() {
   const [count, setCount] = useState(0)
+
+  const result = useQuery({
+    queryKey : ["data"],
+    queryFn : async function () {
+      const data = await fetch('https://jsonplaceholder.typicode.com/todos/1')
+      return data.json()
+    }
+  })
+
+  console.log(result);
+  
 
   return (
     <>
